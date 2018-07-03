@@ -66,6 +66,7 @@ upstream kong_upstream {
 server {
     server_name kong;
     set $session_secret '';
+    large_client_header_buffers 8 16k;
 > for i = 1, #proxy_listeners do
     listen $(proxy_listeners[i].listener);
 > end
