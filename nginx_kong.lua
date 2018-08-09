@@ -64,12 +64,16 @@ upstream kong_upstream {
 }
 
 server {
+    listen 80;
+    server_name kong;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
     server_name kong;
     set $session_secret '';
     large_client_header_buffers 16 64k;
-> for i = 1, #proxy_listeners do
-    listen $(proxy_listeners[i].listener);
-> end
     error_page 400 404 408 411 412 413 414 417 494 /kong_error_handler;
     error_page 500 502 503 504 /kong_error_handler;
 
