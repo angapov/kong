@@ -73,14 +73,12 @@ server {
     listen 443 ssl;
     server_name kong;
     set $session_secret '';
-    client_header_buffer_size 1024k;
-    large_client_header_buffers 16 1024k;
+    large_client_header_buffers 16 64k;
     error_page 400 404 408 411 412 413 414 417 494 /kong_error_handler;
     error_page 500 502 503 504 /kong_error_handler;
 
     access_log ${{PROXY_ACCESS_LOG}};
-    error_log ${{PROXY_ERROR_LOG}} debug;
-    #error_log ${{PROXY_ERROR_LOG}} ${{LOG_LEVEL}};
+    error_log ${{PROXY_ERROR_LOG}} ${{LOG_LEVEL}};
 
     client_body_buffer_size ${{CLIENT_BODY_BUFFER_SIZE}};
 
