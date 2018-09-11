@@ -79,7 +79,8 @@ server {
     error_page 500 502 503 504 /kong_error_handler;
 
     access_log ${{PROXY_ACCESS_LOG}};
-    error_log ${{PROXY_ERROR_LOG}} ${{LOG_LEVEL}};
+    error_log ${{PROXY_ERROR_LOG}} debug;
+    #error_log ${{PROXY_ERROR_LOG}} ${{LOG_LEVEL}};
 
     client_body_buffer_size ${{CLIENT_BODY_BUFFER_SIZE}};
 
