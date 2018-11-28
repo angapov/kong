@@ -1,4 +1,4 @@
-FROM  kong:0.14.1-centos
+FROM  kong:0.13.1-centos
 RUN yum install -y unzip openssl-devel gcc git
 ADD kong-oidc kong-oidc
 RUN sed -i '/v1.1.0/d' kong-oidc/kong-oidc-1.1.0-0.rockspec
