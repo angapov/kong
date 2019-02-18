@@ -1,7 +1,16 @@
-FROM  kong:0.13.1-centos
-RUN yum install -y unzip openssl-devel gcc git
+FROM  kong:1.0-centos
+ENV PACKAGES="unzip openssl-devel gcc git"
+RUN yum update -y && yum install -y $PACKAGES
 ADD kong-oidc kong-oidc
-RUN sed -i '/v1.1.0/d' kong-oidc/kong-oidc-1.1.0-0.rockspec
-RUN cd kong-oidc; luarocks build kong-oidc-1.1.0-0.rockspec
-RUN yum remove -y unzip openssl-devel gcc git
-COPY nginx_kong.lua /usr/local/share/lua/5.1/kong/templates/nginx_kong.lua
+RUN cd kong-oidc \
+    && luarocks build kong-oidc-1.1.0-0.rockspec \
+    && chown -R kong:kong /usr/local/kong \
+    && setcap 'cap_net_bind_service=+ep' /usr/local/bin/kong \
+    && setcap 'cap_net_bind_service=+ep' /usr/local/openresty/nginx/sbin/nginx
+RUN yum remove -y $PACKAGES \
+    && yum autoremove -y \
+    && yum clean all \
+    && rm -rf /var/cache/yum \
+    && rm -fr *.rock*
+ADD nginx_kong.lua /usr/local/share/lua/5.1/kong/templates/
+ADD kong_defaults.lua /usr/local/share/lua/5.1/kong/templates/
