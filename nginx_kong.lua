@@ -124,16 +124,6 @@ server {
 
     location / {
         
-        map "$host$request_uri" $redirect_neuton {
-          "login.neuton.ai/       "1";
-          "~login.neuton.ai/?.*"  "1";
-          default                 "0";
-        }
-
-        if ($redirect_neuton = 1) {
-          return 302 https://lab.neuton.ai
-        }
-
         default_type                     '';
 
         set $ctx_ref                     '';
