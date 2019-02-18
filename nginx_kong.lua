@@ -81,8 +81,6 @@ server {
     listen 443 ssl;
     server_name kong;
     set $session_secret '';
-    set $session_cookie_persistent on;
-    set $session_cookie_lifetime   2592000;
 
     error_page 400 404 408 411 412 413 414 417 494 /kong_error_handler;
     error_page 500 502 503 504 /kong_error_handler;
