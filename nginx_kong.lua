@@ -100,7 +100,7 @@ server {
     }
 
     ssl_session_cache shared:SSL:10m;
-    ssl_session_timeout 10m;
+    ssl_session_timeout 24h;
     ssl_prefer_server_ciphers on;
     ssl_ciphers ${{SSL_CIPHERS}};
 > end
