@@ -80,7 +80,7 @@ server {
 server {
     listen 443 ssl;
     server_name kong;
-    set $session_secret '';
+    set $session_secret 'v8ESxEuYKczFF5nSj4tcUb9r';
     set $session_strategy regenerate;
 
     error_page 400 404 408 411 412 413 414 417 494 /kong_error_handler;
