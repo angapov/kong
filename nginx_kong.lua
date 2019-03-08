@@ -84,6 +84,8 @@ server {
     set $session_strategy regenerate;
     set $session_storage cookie;
     set $session_cookie_discard 18000;
+    set $session_cookie_lifetime 86400;
+    set $session.cookie.persistent on;
 
     error_page 400 404 408 411 412 413 414 417 494 /kong_error_handler;
     error_page 500 502 503 504 /kong_error_handler;
