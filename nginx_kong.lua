@@ -87,6 +87,8 @@ server {
     set $session_cookie_lifetime 86400;
     set $session.cookie.persistent on;
 
+    add_header Strict-Transport-Security "max-age=86400; includeSubDomains" always;
+
     error_page 400 404 408 411 412 413 414 417 494 /kong_error_handler;
     error_page 500 502 503 504 /kong_error_handler;
 

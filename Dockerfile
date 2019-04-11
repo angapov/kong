@@ -1,4 +1,4 @@
-FROM  kong:1.0-centos
+FROM  kong:1.1.1-centos
 ENV PACKAGES="unzip openssl-devel gcc git"
 RUN yum update -y && yum install -y $PACKAGES
 ADD kong-oidc kong-oidc
